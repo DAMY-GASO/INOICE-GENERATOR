@@ -18,6 +18,12 @@
                 <option value="RISITI YA MALIPO (RECEIPT)">Receipt</option>
             </select>
         </div>
+
+        <div class="form-group">
+    <label>Namba ya TIN:</label>
+    <input type="text" id="inputTin" value="123-456-789" oninput="updateDocument()">
+        </div>
+        
         <div class="form-group">
             <label>Namba ya Hati (Namba Tu, mf: 002):</label>
             <input type="text" id="inputNo" value="002" oninput="updateDocument()">
@@ -103,6 +109,7 @@
                 <div class="company-info">
                     <h2>DamyGaso Tech Solutions</h2>
                     <p>IT support, Web & App Dev, Graphics Design</p>
+                    <p><strong>TIN:</strong> <span id="previewTin">123-456-789</span>
                     <p><strong>Tovuti:</strong> www.damygasotech.com</p>
                 </div>
             </div>
