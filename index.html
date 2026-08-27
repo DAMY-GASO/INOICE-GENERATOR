@@ -149,18 +149,20 @@
             <p><span id="labelSummaryPaidText">Kiasi Kinacholipwa:</span> <strong id="previewPaidNow" style="color: green;">TZS 150,000</strong></p>
             <p><span id="labelBalanceText">Salio Linalobaki:</span> <strong id="previewBalance" style="color: #003366;">TZS 1,350,000</strong></p>
         </div>
-
+        
         <!-- Sehemu ya Chini ya Jedwali -->
-        <div class="footer-section">
-            <div id="invoicePaymentInstructions">
-                <p><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
-                <p>1. M-pesa: <strong>0743322107</strong> (Damas Gambo)</p>
-                <p>2. Lipa kwa M-pesa: <strong>57086053</strong> (DamyGaso Tech)</p>
-            </div>
-            <div id="receiptPaymentDetails" style="display: none;">
-                <p><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
-                <p><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
-            </div>
+<div class="footer-section" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
+    <div style="flex: 1; padding-right: 20px;">
+        <div id="invoicePaymentInstructions">
+            <p style="margin: 0 0 5px 0;"><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
+            <p style="margin: 2px 0;">1. M-pesa: <strong>0743322107</strong> (Damas Gambo)</p>
+            <p style="margin: 2px 0;">2. Lipa kwa M-pesa: <strong>57086053</strong> (DamyGaso Tech)</p>
+        </div>
+        <div id="receiptPaymentDetails" style="display: none;">
+            <p style="margin: 2px 0;"><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
+            <p style="margin: 2px 0;"><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
+        </div>
+    </div>
 
 
             <!-- Muhuri unaonekana kwenye Receipt pekee -->
@@ -171,38 +173,31 @@
                 <circle cx="150" cy="150" r="100"/>
             </clipPath>
             <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
-            
-            <!-- Njia ya juu ya duara -->
-            <path id="topArcPath" d="M 35, 150 A 115, 115 0 1, 1 265, 150" fill="none"/>
-            <!-- Njia ya chini ya duara imebadilishwa ili maneno yaanze upande sahihi -->
-            <path id="bottomArcPath" d="M 265, 150 A 115, 115 0 1, 1 35, 150" fill="none"/>
+            <path id="topArcPath" d="M30.66,106.57 A127,127 0 0 1 269.34,106.57" fill="none"/>
+            <!-- Njia sahihi ya chini inayofanya maandishi yasomeke vizuri -->
+            <path id="bottomArcPath" d="M269.34,193.43 A127,127 0 0 1 30.66,193.43" fill="none"/>
         </defs>
 
-        <!-- Logo (background ya ndani) au herufi za kiini kama hakuna logo -->
         <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
         <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
 
-        <!-- Miduara miwili ya nje na ndani -->
         <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
         <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
 
-        <!-- Jina la kampuni juu (linafuata mzunguko) -->
-        <text font-family="Arial, sans-serif" font-weight="bold" font-size="20" letter-spacing="3" fill="#003366">
+        <text font-family="Arial, sans-serif" font-weight="bold" font-size="21" letter-spacing="3" fill="#003366">
             <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
         </text>
 
-        <!-- Tarehe ya malipo au maandishi ya chini (yanasomeka vizuri bila kuwa kinyumenyume) -->
+        <!-- Maandishi ya tarehe chini ya muhuri yakiwa na side="right" ili yasipinduke -->
         <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
-            <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle">27/08/2026</textPath>
+            <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle" side="right">27/08/2026</textPath>
         </text>
 
-        <!-- Nyota za pembeni -->
-        <use href="#starShape" transform="translate(100, 100) scale(1.2)"/>
-        <use href="#starShape" transform="translate(200, 100) scale(1.2)"/>
-        <use href="#starShape" transform="translate(100, 200) scale(1.2)"/>
-        <use href="#starShape" transform="translate(200, 200) scale(1.2)"/>
+        <use href="#starShape" transform="translate(118,95) scale(1)"/>
+        <use href="#starShape" transform="translate(178,84) scale(1.5)"/>
+        <use href="#starShape" transform="translate(122,216) scale(1.5)"/>
+        <use href="#starShape" transform="translate(182,205) scale(1)"/>
 
-        <!-- Ukanda wa mlalo unaokata katikati na neno IMELIPWA/PAID -->
         <g transform="rotate(-18 150 150)">
             <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
             <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
@@ -210,6 +205,7 @@
         </g>
     </svg>
 </div>
+            
             
         <!-- Footer ya Kampuni -->
         <div class="document-footer">
