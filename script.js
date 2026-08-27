@@ -98,12 +98,12 @@
         document.getElementById('previewNo').innerText = prefix + noValue;
         document.getElementById('noPrefixHint').innerText = "Namba kamili: " + prefix + noValue;
         document.getElementById('currentDate').innerText = formatDateForDisplay(document.getElementById('inputDate').value);
-        document.getElementById('stampDateArcText').textContent = formatDateForDisplay(document.getElementById('inputStampDate').value);
+        document.getElementById('stampDateLabel').innerText = "Tarehe ya Malipo: " + formatDateForDisplay(document.getElementById('inputStampDate').value);
         document.getElementById('previewClient').innerText = document.getElementById('inputClient').value;
         document.getElementById('previewProject').innerText = document.getElementById('inputProject').value;
         document.getElementById('previewDesc').innerText = document.getElementById('inputDesc').value;
         document.getElementById('previewTin').innerText = document.getElementById('inputTin').value;
-        
+
         let milestoneSelect = document.getElementById('inputMilestone');
         document.getElementById('previewMilestone').innerText = milestoneSelect.options[milestoneSelect.selectedIndex].text;
 
@@ -155,24 +155,21 @@
         updateDocument();
     }
 
-    // Kazi ya kupakia logo ya mtumiaji kwenye muhuri (inaonekana kama background ya ndani badala ya herufi "DT")
-    function handleStampLogoUpload(event) {
+    // Kazi ya kupakia picha ya muhuri (uliyoubuni mwenyewe) na kuionyesha kwenye risiti
+    function handleStampImageUpload(event) {
         let file = event.target.files[0];
-        let logoImage = document.getElementById('stampLogoWatermark');
-        let fallbackText = document.getElementById('stampLogoFallbackText');
+        let img = document.getElementById('stampImagePreview');
 
         if (!file) {
-            logoImage.style.display = "none";
-            logoImage.setAttribute('href', '');
-            fallbackText.style.display = "block";
+            img.style.display = "none";
+            img.src = "";
             return;
         }
 
         let reader = new FileReader();
         reader.onload = function (e) {
-            logoImage.setAttribute('href', e.target.result);
-            logoImage.style.display = "block";
-            fallbackText.style.display = "none";
+            img.src = e.target.result;
+            img.style.display = "block";
         };
         reader.readAsDataURL(file);
     }
