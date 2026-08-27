@@ -102,7 +102,8 @@
         document.getElementById('previewClient').innerText = document.getElementById('inputClient').value;
         document.getElementById('previewProject').innerText = document.getElementById('inputProject').value;
         document.getElementById('previewDesc').innerText = document.getElementById('inputDesc').value;
-
+        document.getElementById('previewTin').innerText = document.getElementById('inputTin').value;
+        
         let milestoneSelect = document.getElementById('inputMilestone');
         document.getElementById('previewMilestone').innerText = milestoneSelect.options[milestoneSelect.selectedIndex].text;
 
