@@ -70,7 +70,7 @@
             stampArea.style.display = "block"; // Inaonekana kwenye receipt
             labelAmountText.innerText = "Kiasi Kilicholipwa (TZS):";
             labelSummaryPaidText.innerText = "Kiasi Kilicholipwa:";
-            labelBalanceText.innerText = "Salio Lililobaki:";
+            labelBalanceText.innerText = "Kiasi kilichobaki:";
             previewRow.classList.remove("row-unpaid");
             previewRow.classList.add("row-paid");
             noPrefixHint.innerText = "Namba kamili: DT-REC-" + document.getElementById('inputNo').value;
@@ -81,7 +81,7 @@
             stampArea.style.display = "none"; // Haionekani kwenye invoice
             labelAmountText.innerText = "Kiasi Kinacholipwa (TZS):";
             labelSummaryPaidText.innerText = "Kiasi Kinacholipwa:";
-            labelBalanceText.innerText = "Salio Linalobaki:";
+            labelBalanceText.innerText = "Kiasi kinachobaki:";
             previewRow.classList.remove("row-paid");
             previewRow.classList.add("row-unpaid");
             noPrefixHint.innerText = "Namba kamili: DT-INV-" + document.getElementById('inputNo').value;
