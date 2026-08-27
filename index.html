@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <title>DamyGaso - Professional Invoice & Receipt Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- Sehemu ya Kujaza Taarifa (Form) -->
+    <div class="form-section no-print">
+        <h2>Jaza Taarifa za Hati</h2>
+        <div class="form-group">
+            <label>Aina ya Hati:</label>
+            <select id="inputType" onchange="toggleDocumentType()">
+                <option value="INVOICE">Invoice</option>
+                <option value="RISITI YA MALIPO (RECEIPT)">Receipt</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Namba ya Hati (Namba Tu, mf: 002):</label>
+            <input type="text" id="inputNo" value="002" oninput="updateDocument()">
+            <small id="noPrefixHint" style="color:#666;">Namba kamili: DT-INV-002</small>
+        </div>
+        <div class="form-group">
+            <label>Tarehe ya Hati:</label>
+            <input type="date" id="inputDate" oninput="updateDocument()">
+        </div>
+        <div class="form-group">
+            <label>Aina ya Huduma / Mradi:</label>
+            <select id="inputServiceType" onchange="toggleServiceType()">
+                <option value="WEBAPP">Maendeleo ya Website / App (Malipo kwa Awamu)</option>
+                <option value="ITSUPPORT">IT Support / Graphics Design (Malipo Kamili)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Chagua Awamu ya Malipo:</label>
+            <select id="inputMilestone" onchange="autoFillMilestone()">
+                <option value="Awamu ya 1a: Malipo ya Awali (Kianzio - 20%)">Awamu ya 1a: Kianzio (20%)</option>
+                <option value="Awamu ya 1b: Kukamilisha Kianzio (20%)">Awamu ya 1b: Kianzio (20%)</option>
+                <option value="Awamu ya 2: Maendeleo na Vipengele Vikuu (30%)">Awamu ya 2: Maendeleo (30%)</option>
+                <option value="Awamu ya 3: Ukamilishaji na Kukabidhi (30%)">Awamu ya 3: Kukabidhi (30%)</option>
+                <option value="Malipo Kamili ya Mradi">Malipo Kamili (100%)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Jina la Mteja:</label>
+            <input type="text" id="inputClient" value="Bw. Misso Madirisha" oninput="updateDocument()">
+        </div>
+        <div class="form-group">
+            <label>Jina la Mradi / Huduma:</label>
+            <input type="text" id="inputProject" value="SokoMkononi Web Platform (Phase 1)" oninput="updateDocument()">
+        </div>
+        <div class="form-group">
+            <label>Maelezo ya Kazi (Description):</label>
+            <textarea id="inputDesc" rows="2" oninput="updateDocument()">Kuanzisha mradi rasmi, Mkataba na Makubaliano ya Awali</textarea>
+        </div>
+        <div class="form-group">
+            <label>Jumla ya Mradi Mzima (TZS):</label>
+            <input type="text" id="inputTotalProject" value="1,500,000" oninput="updateDocument()">
+        </div>
+        <div class="form-group">
+            <label id="labelAmountText">Kiasi Kinacholipwa (TZS):</label>
+            <input type="text" id="inputAmountPaid" value="150,000" oninput="updateDocument()">
+        </div>
+
+        <!-- Sehemu Maalum ya Receipt (TxID, Njia ya Malipo, Logo ya Muhuri) -->
+        <div id="receiptFields" style="display:none; background: #eef4f9; padding: 10px; border-radius: 4px; margin-bottom: 12px;">
+            <div class="form-group">
+                <label>Malipo yamelipwa kupitia:</label>
+                <select id="inputPaymentMethod" onchange="updateDocument()">
+                    <option value="M-Pesa (0743322107)">M-Pesa (0743322107)</option>
+                    <option value="Lipa kwa M-Pesa (57086053)">Lipa kwa M-Pesa (57086053)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>TxID (Namba ya Uthibitisho):</label>
+                <input type="text" id="inputTxId" value="8H73... (Weka namba hapa)" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>Tarehe ya Malipo (Itaonekana kwenye Muhuri):</label>
+                <input type="date" id="inputStampDate" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>Weka Logo kwenye Muhuri (Hiari):</label>
+                <input type="file" id="inputStampLogo" accept="image/*" onchange="handleStampLogoUpload(event)">
+                <small style="color:#666;">Ukiacha bila kuweka logo, muhuri utaonyesha herufi "DT".</small>
+            </div>
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Chapisha PDF</button>
+    </div>
+
+    <!-- Sehemu ya Muonekano wa Hati (Live Preview) -->
+    <div class="preview-section" id="printableArea">
+        <div class="header">
+            <div class="brand-container">
+                <!-- Logo ya DamyGaso upande wa kushoto -->
+                <div class="logo-box">
+                    <img src="images/logo.png" alt="DamyGaso Tech Solutions Logo">
+                </div>
+                <div class="company-info">
+                    <h2>DamyGaso Tech Solutions</h2>
+                    <p>IT support, Web & App Dev, Graphics Design</p>
+                    <p><strong>Tovuti:</strong> www.damygasotech.com</p>
+                </div>
+            </div>
+            <div class="doc-title">
+                <h1 id="previewType">INVOICE</h1>
+                <p><span id="previewNo">DT-INV-002</span></p>
+                <p>Tarehe: <span id="currentDate"></span></p>
+            </div>
+        </div>
+
+        <div class="details">
+            <p><strong>Imetolewa Kwa:</strong> <span id="previewClient" class="detail-highlight">Bw. Misso Madirisha</span></p>
+            <p><strong>Mradi:</strong> <span id="previewProject" class="detail-highlight">SokoMkononi Web Platform (Phase 1)</span></p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Maelekezo ya Kazi (Description)</th>
+                    <th>Awamu ya Malipo</th>
+                    <th>Kiasi (TZS)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="previewRow">
+                    <td id="previewDesc">Kuanzisha mradi rasmi, Mkataba na Makubaliano ya Awali</td>
+                    <td id="previewMilestone">Awamu ya 1a: Kianzio (10%)</td>
+                    <td id="previewAmountPaid">TZS 150,000</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Muhtasari wa Salio (Inabadilika Majina kulingana na Invoice au Receipt) -->
+        <div class="summary-box">
+            <h3 class="payment-summary-title">Maelezo ya Malipo</h3>
+            <p><span>Jumla ya Gharama ya Mradi:</span> <strong id="previewTotal">TZS 1,500,000</strong></p>
+            <p><span id="labelSummaryPaidText">Kiasi Kinacholipwa:</span> <strong id="previewPaidNow" style="color: green;">TZS 150,000</strong></p>
+            <p><span id="labelBalanceText">Salio Linalobaki:</span> <strong id="previewBalance" style="color: #003366;">TZS 1,350,000</strong></p>
+        </div>
+
+        <!-- Sehemu ya Chini ya Jedwali -->
+        <div class="footer-section">
+            <div id="invoicePaymentInstructions">
+                <p><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
+                <p>1. M-pesa: <strong>0743322107</strong> (Damas Gambo)</p>
+                <p>2. Lipa kwa M-pesa: <strong>57086053</strong> (DamyGaso Tech)</p>
+            </div>
+            <div id="receiptPaymentDetails" style="display: none;">
+                <p><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
+                <p><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
+            </div>
+
+            <!-- Muhuri unaonekana kwenye Receipt pekee -->
+            <div class="stamp-area" id="stampAreaContainer" style="display: none;">
+                <svg class="stamp-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="logoClip">
+                            <circle cx="150" cy="150" r="100"/>
+                        </clipPath>
+                        <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
+                        <path id="topArcPath" d="M30.66,106.57 A127,127 0 0 1 269.34,106.57" fill="none"/>
+                        <path id="bottomArcPath" d="M269.34,193.43 A127,127 0 0 1 30.66,193.43" fill="none"/>
+                    </defs>
+
+                    <!-- Logo (background ya ndani) au herufi za kiini kama hakuna logo -->
+                    <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
+                    <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
+
+                    <!-- Miduara miwili (mstari mzima, si dotted) -->
+                    <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
+                    <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
+
+                    <!-- Jina la kampuni juu (limepinda kufuata duara) -->
+                    <text font-family="Arial, sans-serif" font-weight="bold" font-size="21" letter-spacing="3" fill="#003366">
+                        <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
+                    </text>
+
+                    <!-- Tarehe ya malipo chini (limepinda kufuata duara) -->
+                    <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
+                        <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle">27/08/2026</textPath>
+                    </text>
+
+                    <!-- Nyota -->
+                    <use href="#starShape" transform="translate(118,95) scale(1)"/>
+                    <use href="#starShape" transform="translate(178,84) scale(1.5)"/>
+                    <use href="#starShape" transform="translate(122,216) scale(1.5)"/>
+                    <use href="#starShape" transform="translate(182,205) scale(1)"/>
+
+                    <!-- Ukanda wa mlalo unaokata katikati -->
+                    <g transform="rotate(-18 150 150)">
+                        <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
+                        <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
+                        <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="#003366" textLength="255" lengthAdjust="spacingAndGlyphs">IMELIPWA/PAID</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Footer ya Kampuni -->
+        <div class="document-footer">
+            <p class="motto">"Elevating tech beyond limits"</p>
+            <p>DamyGaso Tech Solutions | Simu: 0743322107 | Barua pepe: info@damygasotech.com | Tovuti: www.damygasotech.com</p>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
