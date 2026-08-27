@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+   <!DOCTYPE html>
 <html lang="sw">
 <head>
     <meta charset="UTF-8">
@@ -20,8 +21,8 @@
         </div>
 
         <div class="form-group">
-    <label>Namba ya TIN:</label>
-    <input type="text" id="inputTin" value="123-456-789" oninput="updateDocument()">
+            <label>Namba ya TIN:</label>
+            <input type="text" id="inputTin" value="123-456-789" oninput="updateDocument()">
         </div>
         
         <div class="form-group">
@@ -109,7 +110,7 @@
                 <div class="company-info">
                     <h2>DamyGaso Tech Solutions</h2>
                     <p>IT support, Web & App Dev, Graphics Design</p>
-                    <p><strong>TIN:</strong> <span id="previewTin">123-456-789</span>
+                    <p><strong>TIN:</strong> <span id="previewTin">123-456-789</span></p>
                     <p><strong>Tovuti:</strong> www.damygasotech.com</p>
                 </div>
             </div>
@@ -142,7 +143,7 @@
             </tbody>
         </table>
 
-        <!-- Muhtasari wa Salio (Inabadilika Majina kulingana na Invoice au Receipt) -->
+        <!-- Muhtasari wa Salio -->
         <div class="summary-box">
             <h3 class="payment-summary-title">Maelezo ya Malipo</h3>
             <p><span>Jumla ya Gharama ya Mradi:</span> <strong id="previewTotal">TZS 1,500,000</strong></p>
@@ -150,62 +151,61 @@
             <p><span id="labelBalanceText">Salio Linalobaki:</span> <strong id="previewBalance" style="color: #003366;">TZS 1,350,000</strong></p>
         </div>
         
-        <!-- Sehemu ya Chini ya Jedwali -->
-<div class="footer-section" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
-    <div style="flex: 1; padding-right: 20px;">
-        <div id="invoicePaymentInstructions">
-            <p style="margin: 0 0 5px 0;"><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
-            <p style="margin: 2px 0;">1. M-pesa: <strong>0743322107</strong> (Damas Gambo)</p>
-            <p style="margin: 2px 0;">2. Lipa kwa M-pesa: <strong>57086053</strong> (DamyGaso Tech)</p>
-        </div>
-        <div id="receiptPaymentDetails" style="display: none;">
-            <p style="margin: 2px 0;"><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
-            <p style="margin: 2px 0;"><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
-        </div>
-    </div>
-
+        <!-- Sehemu ya Chini ya Jedwali (Maelekezo ya Malipo na Muhuri zikiwa zimepangwa vizuri pembeni kwa pembeni) -->
+        <div class="footer-section" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
+            <div style="flex: 1; padding-right: 20px;">
+                <div id="invoicePaymentInstructions">
+                    <p style="margin: 0 0 5px 0;"><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
+                    <p style="margin: 2px 0;">1. M-pesa: <strong>0743322107</strong> (Damas Gambo)</p>
+                    <p style="margin: 2px 0;">2. Lipa kwa M-pesa: <strong>57086053</strong> (DamyGaso Tech)</p>
+                </div>
+                <div id="receiptPaymentDetails" style="display: none;">
+                    <p style="margin: 2px 0;"><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
+                    <p style="margin: 2px 0;"><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
+                </div>
+            </div>
 
             <!-- Muhuri unaonekana kwenye Receipt pekee -->
-<div class="stamp-area" id="stampAreaContainer" style="display: none;">
-    <svg class="stamp-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <clipPath id="logoClip">
-                <circle cx="150" cy="150" r="100"/>
-            </clipPath>
-            <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
-            <path id="topArcPath" d="M30.66,106.57 A127,127 0 0 1 269.34,106.57" fill="none"/>
-            <!-- Njia sahihi ya chini inayofanya maandishi yasomeke vizuri -->
-            <path id="bottomArcPath" d="M269.34,193.43 A127,127 0 0 1 30.66,193.43" fill="none"/>
-        </defs>
+            <div style="flex-shrink: 0;">
+                <div class="stamp-area" id="stampAreaContainer" style="display: none;">
+                    <svg class="stamp-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="logoClip">
+                                <circle cx="150" cy="150" r="100"/>
+                            </clipPath>
+                            <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
+                            <path id="topArcPath" d="M30.66,106.57 A127,127 0 0 1 269.34,106.57" fill="none"/>
+                            <path id="bottomArcPath" d="M269.34,193.43 A127,127 0 0 1 30.66,193.43" fill="none"/>
+                        </defs>
 
-        <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
-        <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
+                        <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
+                        <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
 
-        <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
-        <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
+                        <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
+                        <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
 
-        <text font-family="Arial, sans-serif" font-weight="bold" font-size="21" letter-spacing="3" fill="#003366">
-            <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
-        </text>
+                        <text font-family="Arial, sans-serif" font-weight="bold" font-size="21" letter-spacing="3" fill="#003366">
+                            <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
+                        </text>
 
-        <!-- Maandishi ya tarehe chini ya muhuri yakiwa na side="right" ili yasipinduke -->
-        <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
-            <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle" side="right">27/08/2026</textPath>
-        </text>
+                        <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
+                            <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle" side="right">27/08/2026</textPath>
+                        </text>
 
-        <use href="#starShape" transform="translate(118,95) scale(1)"/>
-        <use href="#starShape" transform="translate(178,84) scale(1.5)"/>
-        <use href="#starShape" transform="translate(122,216) scale(1.5)"/>
-        <use href="#starShape" transform="translate(182,205) scale(1)"/>
+                        <use href="#starShape" transform="translate(118,95) scale(1)"/>
+                        <use href="#starShape" transform="translate(178,84) scale(1.5)"/>
+                        <use href="#starShape" transform="translate(122,216) scale(1.5)"/>
+                        <use href="#starShape" transform="translate(182,205) scale(1)"/>
 
-        <g transform="rotate(-18 150 150)">
-            <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
-            <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
-            <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="#003366" textLength="255" lengthAdjust="spacingAndGlyphs">IMELIPWA/PAID</text>
-        </g>
-    </svg>
-</div>
-            
+                        <g transform="rotate(-18 150 150)">
+                            <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
+                            <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
+                            <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="#003366" textLength="255" lengthAdjust="spacingAndGlyphs">IMELIPWA/PAID</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
             
         <!-- Footer ya Kampuni -->
         <div class="document-footer">
@@ -219,3 +219,4 @@
 
 </body>
 </html>
+             
