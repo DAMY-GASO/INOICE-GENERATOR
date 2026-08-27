@@ -162,52 +162,55 @@
                 <p><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
             </div>
 
+
             <!-- Muhuri unaonekana kwenye Receipt pekee -->
-            <div class="stamp-area" id="stampAreaContainer" style="display: none;">
-                <svg class="stamp-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <clipPath id="logoClip">
-                            <circle cx="150" cy="150" r="100"/>
-                        </clipPath>
-                        <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
-                        <path id="topArcPath" d="M30.66,106.57 A127,127 0 0 1 269.34,106.57" fill="none"/>
-                        <path id="bottomArcPath" d="M269.34,193.43 A127,127 0 0 1 30.66,193.43" fill="none"/>
-                    </defs>
+<div class="stamp-area" id="stampAreaContainer" style="display: none;">
+    <svg class="stamp-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <clipPath id="logoClip">
+                <circle cx="150" cy="150" r="100"/>
+            </clipPath>
+            <polygon id="starShape" points="0,-10 2.351,-3.236 9.511,-3.090 3.804,1.236 5.878,8.090 0,4 -5.878,8.090 -3.804,1.236 -9.511,-3.090 -2.351,-3.236" fill="#003366"/>
+            
+            <!-- Njia ya juu ya duara -->
+            <path id="topArcPath" d="M 35, 150 A 115, 115 0 1, 1 265, 150" fill="none"/>
+            <!-- Njia ya chini ya duara imebadilishwa ili maneno yaanze upande sahihi -->
+            <path id="bottomArcPath" d="M 265, 150 A 115, 115 0 1, 1 35, 150" fill="none"/>
+        </defs>
 
-                    <!-- Logo (background ya ndani) au herufi za kiini kama hakuna logo -->
-                    <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
-                    <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
+        <!-- Logo (background ya ndani) au herufi za kiini kama hakuna logo -->
+        <image id="stampLogoWatermark" x="60" y="60" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#logoClip)" opacity="0.22" style="display:none;"></image>
+        <text id="stampLogoFallbackText" x="150" y="172" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="60" fill="#4A90E2" opacity="0.18">DT</text>
 
-                    <!-- Miduara miwili (mstari mzima, si dotted) -->
-                    <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
-                    <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
+        <!-- Miduara miwili ya nje na ndani -->
+        <circle cx="150" cy="150" r="142" fill="none" stroke="#003366" stroke-width="3"/>
+        <circle cx="150" cy="150" r="112" fill="none" stroke="#003366" stroke-width="2"/>
 
-                    <!-- Jina la kampuni juu (limepinda kufuata duara) -->
-                    <text font-family="Arial, sans-serif" font-weight="bold" font-size="21" letter-spacing="3" fill="#003366">
-                        <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
-                    </text>
+        <!-- Jina la kampuni juu (linafuata mzunguko) -->
+        <text font-family="Arial, sans-serif" font-weight="bold" font-size="20" letter-spacing="3" fill="#003366">
+            <textPath href="#topArcPath" startOffset="50%" text-anchor="middle">DAMYGASO TECH</textPath>
+        </text>
 
-                    <!-- Tarehe ya malipo chini (limepinda kufuata duara) -->
-                    <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
-                        <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle">27/08/2026</textPath>
-                    </text>
+        <!-- Tarehe ya malipo au maandishi ya chini (yanasomeka vizuri bila kuwa kinyumenyume) -->
+        <text font-family="Arial, sans-serif" font-weight="bold" font-size="18" letter-spacing="2" fill="#003366">
+            <textPath id="stampDateArcText" href="#bottomArcPath" startOffset="50%" text-anchor="middle">27/08/2026</textPath>
+        </text>
 
-                    <!-- Nyota -->
-                    <use href="#starShape" transform="translate(118,95) scale(1)"/>
-                    <use href="#starShape" transform="translate(178,84) scale(1.5)"/>
-                    <use href="#starShape" transform="translate(122,216) scale(1.5)"/>
-                    <use href="#starShape" transform="translate(182,205) scale(1)"/>
+        <!-- Nyota za pembeni -->
+        <use href="#starShape" transform="translate(100, 100) scale(1.2)"/>
+        <use href="#starShape" transform="translate(200, 100) scale(1.2)"/>
+        <use href="#starShape" transform="translate(100, 200) scale(1.2)"/>
+        <use href="#starShape" transform="translate(200, 200) scale(1.2)"/>
 
-                    <!-- Ukanda wa mlalo unaokata katikati -->
-                    <g transform="rotate(-18 150 150)">
-                        <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
-                        <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
-                        <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="#003366" textLength="255" lengthAdjust="spacingAndGlyphs">IMELIPWA/PAID</text>
-                    </g>
-                </svg>
-            </div>
-        </div>
-
+        <!-- Ukanda wa mlalo unaokata katikati na neno IMELIPWA/PAID -->
+        <g transform="rotate(-18 150 150)">
+            <line x1="12" y1="130" x2="288" y2="130" stroke="#003366" stroke-width="2.5"/>
+            <line x1="12" y1="172" x2="288" y2="172" stroke="#003366" stroke-width="2.5"/>
+            <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="30" fill="#003366" textLength="255" lengthAdjust="spacingAndGlyphs">IMELIPWA/PAID</text>
+        </g>
+    </svg>
+</div>
+            
         <!-- Footer ya Kampuni -->
         <div class="document-footer">
             <p class="motto">"Elevating tech beyond limits"</p>
