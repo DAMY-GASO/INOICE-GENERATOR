@@ -16,12 +16,14 @@
             <select id="inputType" onchange="toggleDocumentType()">
                 <option value="INVOICE">Invoice</option>
                 <option value="RISITI YA MALIPO (RECEIPT)">Receipt</option>
+                <option value="SLA">SLA (Makubaliano ya Huduma)</option>
+                <option value="PROPOSAL">Proposal (Pendekezo la Mradi)</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Namba ya TIN:</label>
-            <input type="text" id="inputTin" value="165-552-164" oninput="updateDocument()">
+            <input type="text" id="inputTin" value="123-456-789" oninput="updateDocument()">
         </div>
 
         <div class="form-group">
@@ -89,9 +91,122 @@
                 <input type="date" id="inputStampDate" oninput="updateDocument()">
             </div>
             <div class="form-group">
-                <label>Pakia Muhuri (Picha ya PNG/JPG):</label>
+                <label>Badilisha Muhuri wa Malipo (Hiari - chaguo-msingi tayari limewekwa):</label>
                 <input type="file" id="inputStampImage" accept="image/*" onchange="handleStampImageUpload(event)">
-                <small style="color:#666;">Weka picha ya muhuri uliyoubuni mwenyewe; itaonekana pale pale kwenye risiti.</small>
+                <small style="color:#666;">Muhuri wa "PAYMENT RECEIVED" tayari umewekwa kama chaguo-msingi; pakia picha nyingine ukitaka kuubadilisha.</small>
+            </div>
+        </div>
+
+        <!-- Sehemu Maalum ya SLA (Makubaliano ya Huduma) -->
+        <div id="slaFields" style="display:none; background: #eef4f9; padding: 10px; border-radius: 4px; margin-bottom: 12px;">
+            <div class="form-group">
+                <label>Kichwa cha Makubaliano:</label>
+                <input type="text" id="inputSlaTitle" value="MAKUBALIANO YA HUDUMA YA UJENZI WA MFUMO" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>Lengo la Mradi:</label>
+                <textarea id="inputSlaGoal" rows="3" oninput="updateDocument()">Lengo la makubaliano haya ni kuweka msingi rasmi wa utekelezaji wa Awamu ya Kwanza (Phase 1) ya ujenzi wa mtandao wa SokoMkononi Web Platform, ikiwa ni pamoja na usanifu wa awali, mkataba, na kuanzishwa kwa mradi huo.</textarea>
+            </div>
+            <div class="form-group">
+                <label>Kazi za Awamu Husika:</label>
+                <textarea id="inputSlaScopeWork" rows="2" oninput="updateDocument()">Kuanzisha mradi rasmi, kukubaliana na muundo wa kiufundi (system architecture), na kuanza uandaaji wa mfumo kama ulivyoelezwa kwenye ankara</textarea>
+                <small style="color:#666;">Namba ya ankara (invoice) itaongezwa mwishoni kiotomatiki.</small>
+            </div>
+            <div class="form-group">
+                <label>Sera ya Mabadiliko (Revisions):</label>
+                <textarea id="inputSlaRevisions" rows="2" oninput="updateDocument()">Mteja anaruhusiwa kutoa maoni au mabadiliko madogo wakati wa mchakato wa usanifu kabla ya kuingia kwenye hatua ya uandaji wa code (coding phase).</textarea>
+            </div>
+            <div class="form-group">
+                <label>Muda wa Kukamilisha:</label>
+                <textarea id="inputSlaTimeline" rows="2" oninput="updateDocument()">Mtoa huduma atafanya kazi kwa umakini ili kuhakikisha hatua hii inakamilika kwa wakati uliopangwa na kukabidhiwa mteja kwa ukaguzi.</textarea>
+            </div>
+            <div class="form-group">
+                <label>Badilisha Muhuri wa Idhini (Hiari - chaguo-msingi tayari limewekwa):</label>
+                <input type="file" id="inputSlaStampImage" accept="image/*" onchange="handleSlaStampUpload(event)">
+                <small style="color:#666;">Muhuri wa "APPROVED" tayari umewekwa kama chaguo-msingi; pakia picha nyingine ukitaka kuubadilisha.</small>
+            </div>
+        </div>
+
+        <!-- Sehemu Maalum ya Proposal (Pendekezo la Mradi) -->
+        <div id="proposalFields" style="display:none; background: #eef4f9; padding: 10px; border-radius: 4px; margin-bottom: 12px;">
+            <div class="form-group">
+                <label>Kauli Mbiu (Hiari):</label>
+                <input type="text" id="inputPropTagline" value="Safari Salama, Biashara Yenye Tija" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>1. Aya ya Utangulizi:</label>
+                <textarea id="inputPropIntro" rows="3" oninput="updateDocument()">Tunashukuru kwa kutushirikisha katika mradi huu muhimu. Baada ya kupitia mahitaji yako, tumebaini kuwa hii ni platform ya kimkakati. DamyGaso Tech Solutions tuko tayari kutoa utaalamu wetu ili kujenga mfumo unaoweza kukua (Scalable) na wenye usalama wa hali ya juu (Secure).</textarea>
+            </div>
+            <div class="form-group">
+                <label>2. Wajibu wa Developer (Kichwa: Maelezo, mstari mmoja kwa kila kimoja):</label>
+                <textarea id="inputPropScope" rows="4" oninput="updateDocument()">UI/UX Design: Ubunifu wa interface rahisi kwenye Mobile App na Web Dashboard.
+Core Platform & Architecture: Ujenzi wa Admin Dashboard, Mobile Apps, Backend na Database.
+Payment Integration: Kuunganisha M-Pesa, TigoPesa, Airtel Money na Benki.
+Handover & Deployment: Majaribio, mafunzo, na kukabidhi source code.</textarea>
+            </div>
+            <div class="form-group">
+                <label>3. Viwango vya Kiufundi:</label>
+                <textarea id="inputPropTechnical" rows="3" oninput="updateDocument()">Scalability: Mfumo utahimili ukuaji wa watumiaji wengi kwa wakati mmoja.
+Security: RBAC kwa Admin, na ulinzi wa taarifa binafsi na malipo.
+Ownership: Source code, domain, hosting na akaunti zote ni mali ya mmiliki wa mradi.</textarea>
+            </div>
+            <div class="form-group">
+                <label>4. Kipaumbele cha Mradi:</label>
+                <textarea id="inputPropPillars" rows="3" oninput="updateDocument()">RELIABILITY: Upatikanaji wa mfumo saa 24 bila hitilafu.
+SPEED & CONVENIENCE: Matumizi rahisi ndani ya sekunde chache.
+SECURITY & TRANSPARENCY: Ulinzi wa taarifa nyeti na malipo.</textarea>
+            </div>
+            <div class="form-group">
+                <label>5. Modeli ya Biashara (Mapato):</label>
+                <textarea id="inputPropRevenue" rows="3" oninput="updateDocument()">Listing / Featured Fees: Malipo ya kutangaza au kuonekana zaidi.
+Usage Limitations & Packages: Vifurushi vya malipo baada ya kikomo cha bure.
+Matangazo (Ad placements): Nafasi za matangazo ndani ya app.</textarea>
+            </div>
+            <div class="form-group">
+                <label>6. Technology Stack:</label>
+                <textarea id="inputPropStack" rows="4" oninput="updateDocument()">Web & Dashboard: Next.js / React.
+Mobile Apps: React Native / Flutter (Android & iOS).
+Backend & Database: Node.js na PostgreSQL / Firebase.
+Infrastructure: Cloud Hosting, Payment Gateway APIs, SMS Gateways.</textarea>
+            </div>
+            <div class="form-group">
+                <label>7. Muda wa Utekelezaji (Awamu | Muda, mstari mmoja kwa kila awamu):</label>
+                <textarea id="inputPropTimeline" rows="4" oninput="updateDocument()">Design & Architecture | Wiki 2
+Backend & Database Modeling | Wiki 3
+Mobile App & Web Development | Wiki 4
+Testing, Payment Integration & Training | Wiki 1</textarea>
+            </div>
+            <div class="form-group">
+                <label>Jumla ya Muda:</label>
+                <input type="text" id="inputPropTotalTime" value="Miezi 2 hadi 3" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>8. Ofa (mstari mmoja kwa kila moja):</label>
+                <textarea id="inputPropOffers" rows="3" oninput="updateDocument()">Domain name ya kwanza bure
+Business emails
+Miezi 3 ya maintenance bure</textarea>
+            </div>
+            <div class="form-group">
+                <label>Awamu za Malipo (Asilimia):</label>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="inputPropPay1Pct" value="40%" oninput="updateDocument()">
+                    <input type="text" id="inputPropPay2Pct" value="30%" oninput="updateDocument()">
+                    <input type="text" id="inputPropPay3Pct" value="30%" oninput="updateDocument()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Maelezo ya Awamu za Malipo:</label>
+                <input type="text" id="inputPropPay1Desc" value="Kabla ya kuanza kazi (UI/UX & usanifu)" oninput="updateDocument()" style="margin-bottom:6px;">
+                <input type="text" id="inputPropPay2Desc" value="Baada ya Backend, Database na prototypes" oninput="updateDocument()" style="margin-bottom:6px;">
+                <input type="text" id="inputPropPay3Desc" value="Baada ya majaribio, mafunzo na makabidhiano" oninput="updateDocument()">
+            </div>
+            <div class="form-group">
+                <label>9. Kwa Nini Tushirikiane:</label>
+                <textarea id="inputPropClosing" rows="3" oninput="updateDocument()">DamyGaso Tech Solutions tuna uzoefu wa kutosha katika ujenzi wa mifumo ya kidijitali na usalama wa data. Tunajenga mfumo ambao ni uwekezaji thabiti wa kukuza biashara yako. Tunasubiri ridhaa yako ili tuanze safari hii ya ujenzi.</textarea>
+            </div>
+            <div class="form-group">
+                <label>Jina la Mtoa Taarifa:</label>
+                <input type="text" id="inputPropSigner" value="Damas Gambo" oninput="updateDocument()">
             </div>
         </div>
 
@@ -104,7 +219,7 @@
             <div class="brand-container">
                 <!-- Logo ya DamyGaso upande wa kushoto -->
                 <div class="logo-box">
-                    <img src="./logo.png" alt="DamyGaso Tech Solutions Logo">
+                    <img src="images/logo.png" alt="DamyGaso Tech Solutions Logo">
                 </div>
                 <div class="company-info">
                     <h2>DAMYGASO TECH SOLUTIONS</h2>
@@ -125,51 +240,171 @@
             <p><strong>Mradi:</strong> <span id="previewProject" class="detail-highlight">SokoMkononi Web Platform (Phase 1)</span></p>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Maelekezo ya Kazi (Description)</th>
-                    <th>Awamu ya Malipo</th>
-                    <th>Kiasi (TZS)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="previewRow">
-                    <td id="previewDesc">Kuanzisha mradi rasmi, Mkataba na Makubaliano ya Awali</td>
-                    <td id="previewMilestone">Awamu ya 1a: Kianzio (20%)</td>
-                    <td id="previewAmountPaid">TZS 150,000</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Maudhui ya Invoice/Receipt -->
+        <div id="invoiceReceiptContent">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Maelekezo ya Kazi (Description)</th>
+                        <th>Awamu ya Malipo</th>
+                        <th>Kiasi (TZS)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="previewRow">
+                        <td id="previewDesc">Kuanzisha mradi rasmi, Mkataba na Makubaliano ya Awali</td>
+                        <td id="previewMilestone">Awamu ya 1a: Kianzio (20%)</td>
+                        <td id="previewAmountPaid">TZS 150,000</td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <!-- Muhtasari wa Salio -->
-        <div class="summary-box">
-            <h3 class="payment-summary-title">Maelezo ya Malipo</h3>
-            <p><span>Jumla ya Gharama ya Mradi:</span> <strong id="previewTotal">TZS 1,500,000</strong></p>
-            <p><span id="labelSummaryPaidText">Kiasi Kinacholipwa:</span> <strong id="previewPaidNow" style="color: green;">TZS 150,000</strong></p>
-            <p><span id="labelBalanceText">Kiasi kinachobaki:</span> <strong id="previewBalance" style="color: #003366;">TZS 1,350,000</strong></p>
+            <!-- Muhtasari wa Salio -->
+            <div class="summary-box">
+                <h3 class="payment-summary-title">Maelezo ya Malipo</h3>
+                <p><span>Jumla ya Gharama ya Mradi:</span> <strong id="previewTotal">TZS 1,500,000</strong></p>
+                <p><span id="labelSummaryPaidText">Kiasi Kinacholipwa:</span> <strong id="previewPaidNow" style="color: green;">TZS 150,000</strong></p>
+                <p><span id="labelBalanceText">Kiasi kinachobaki:</span> <strong id="previewBalance" style="color: #003366;">TZS 1,350,000</strong></p>
+            </div>
+
+            <!-- Sehemu ya Chini ya Jedwali (Maelekezo ya Malipo na Muhuri zikiwa zimepangwa vizuri pembeni kwa pembeni) -->
+            <div class="footer-section" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
+                <div style="flex: 1; padding-right: 20px;">
+                    <div id="invoicePaymentInstructions">
+                        <p style="margin: 0 0 5px 0;"><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
+                        <p style="margin: 2px 0;">1. M-pesa: <strong>0743322107</strong> (Damas G. Salimu)</p>
+                        <p style="margin: 2px 0;">2. Lipa kwa M-pesa: <strong>57086053</strong> (Damas G Salimu)</p>
+                    </div>
+                    <div id="receiptPaymentDetails" style="display: none;">
+                        <p style="margin: 2px 0;"><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
+                        <p style="margin: 2px 0;"><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
+                    </div>
+                </div>
+
+                <!-- Muhuri unaonekana kwenye Receipt pekee -->
+                <div style="flex-shrink: 0;">
+                    <div class="stamp-area" id="stampAreaContainer" style="display: none;">
+                        <img id="stampImagePreview" class="stamp-image" src="images/payment-stamp.png" alt="Muhuri wa Malipo">
+                        <p class="stamp-date-label" id="stampDateLabel"></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Sehemu ya Chini ya Jedwali (Maelekezo ya Malipo na Muhuri zikiwa zimepangwa vizuri pembeni kwa pembeni) -->
-        <div class="footer-section" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;">
-            <div style="flex: 1; padding-right: 20px;">
-                <div id="invoicePaymentInstructions">
-                    <p style="margin: 0 0 5px 0;"><strong>Unaweza kulipia kupitia njia hizi za malipo:</strong></p>
-                    <p style="margin: 2px 0;">1. M-pesa: <strong>0743322107</strong> (Damas G. Salimu)</p>
-                    <p style="margin: 2px 0;">2. Lipa kwa M-pesa: <strong>57086053</strong> (Damas G. Salimu)</p>
+        <!-- Maudhui ya SLA (Makubaliano ya Huduma) -->
+        <div id="slaContent" style="display:none;">
+            <div class="sla-section">
+                <h3 class="sla-heading">1. WAHUSIKA WA MKATABA</h3>
+                <p>Mtoa Huduma: <strong>DamyGaso Tech Solutions</strong></p>
+                <p>Mteja: <strong id="previewSlaClient">Bw. Misso Madirisha</strong></p>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">2. LENGO LA MRADI</h3>
+                <p id="previewSlaGoal"></p>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">3. GHARAMA NA UTARATIBU WA MALIPO</h3>
+                <table>
+                    <thead>
+                        <tr><th>Maelezo ya Malipo</th><th>Kiasi (TZS)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Jumla ya Gharama ya Mradi</td><td id="previewSlaTotal">TZS 1,500,000</td></tr>
+                        <tr><td id="previewSlaMilestoneLabel">Awamu ya 1a: Kianzio (20%) - Imelipwa</td><td id="previewSlaPaid">TZS 300,000</td></tr>
+                        <tr><td>Kiasi Kilichobaki</td><td id="previewSlaBalance">TZS 1,200,000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">4. MAJUKUMU NA MAKUBALIANO YA MSINGI</h3>
+                <ol class="sla-list">
+                    <li id="previewSlaScopeWork"></li>
+                    <li id="previewSlaRevisions"></li>
+                    <li id="previewSlaTimeline"></li>
+                </ol>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">5. SAINI NA UTAMBULISHO</h3>
+                <div class="sla-signatures">
+                    <div class="sla-signature-block">
+                        <p>Imetolewa na (Mtoa Huduma):</p>
+                        <p><strong>DamyGaso Tech Solutions</strong></p>
+                        <img id="slaStampPreview" class="sla-approved-stamp" src="images/sla-approved-stamp.png" alt="Muhuri wa Idhini">
+                        <p>Tarehe: <span id="previewSlaDate1"></span></p>
+                        <p class="sla-sign-line">Saini: ___________________________</p>
+                    </div>
+                    <div class="sla-signature-block">
+                        <p>Imepokelewa na kukubaliwa na (Mteja):</p>
+                        <p><strong id="previewSlaClient2">Bw. Misso Madirisha</strong></p>
+                        <p>Tarehe: <span id="previewSlaDate2"></span></p>
+                        <p class="sla-sign-line">Saini: ___________________________</p>
+                    </div>
                 </div>
-                <div id="receiptPaymentDetails" style="display: none;">
-                    <p style="margin: 2px 0;"><strong>Malipo yamelipwa kupitia:</strong> <span id="previewMethodUsed">M-Pesa (0743322107)</span></p>
-                    <p style="margin: 2px 0;"><strong>TxID:</strong> <span id="previewDisplayTxId">8H73...</span></p>
+            </div>
+        </div>
+
+        <!-- Maudhui ya Proposal (Pendekezo la Mradi) -->
+        <div id="proposalContent" style="display:none;">
+            <p id="previewPropTagline" class="prop-tagline"></p>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">1. Utangulizi</h3>
+                <p id="previewPropIntro"></p>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">2. Wajibu wa Developer</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropScope"></ul>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">3. Viwango vya Kiufundi</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropTechnical"></ul>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">4. Kipaumbele cha Mradi</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropPillars"></ul>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">5. Modeli ya Biashara na Mapato</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropRevenue"></ul>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">6. Utekelezaji (Technology Stack)</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropStack"></ul>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">7. Muda wa Utekelezaji</h3>
+                <div id="previewPropTimeline"></div>
+                <p class="prop-total-time" id="previewPropTotalTime"></p>
+            </div>
+
+            <div class="sla-section">
+                <h3 class="sla-heading">8. Gharama na Malipo</h3>
+                <ul class="sla-list prop-bullet-list" id="previewPropOffers"></ul>
+                <div class="prop-price-box">
+                    <div class="prop-price-label">Jumla ya Gharama ya Mradi</div>
+                    <div class="prop-price-amount" id="previewPropCost"></div>
+                </div>
+                <div class="prop-pay-terms">
+                    <div class="prop-pay-term"><div class="prop-pay-pct" id="previewPropPay1Pct"></div><div id="previewPropPay1Desc"></div></div>
+                    <div class="prop-pay-term"><div class="prop-pay-pct" id="previewPropPay2Pct"></div><div id="previewPropPay2Desc"></div></div>
+                    <div class="prop-pay-term"><div class="prop-pay-pct" id="previewPropPay3Pct"></div><div id="previewPropPay3Desc"></div></div>
                 </div>
             </div>
 
-            <!-- Muhuri unaonekana kwenye Receipt pekee -->
-            <div style="flex-shrink: 0;">
-                <div class="stamp-area" id="stampAreaContainer" style="display: none;">
-                    <img id="stampImagePreview" class="stamp-image" style="display:none;" alt="Muhuri wa Malipo">
-                    <p class="stamp-date-label" id="stampDateLabel"></p>
-                </div>
+            <div class="sla-section">
+                <h3 class="sla-heading">9. Kwa Nini Tushirikiane</h3>
+                <p id="previewPropClosing"></p>
+                <p style="margin-top:14px;">Wako katika ujenzi wa teknolojia,<br><strong id="previewPropSigner"></strong> - DamyGaso Tech Solutions</p>
             </div>
         </div>
 
